@@ -1,7 +1,7 @@
 import maya.cmds as cmds
 
 # Define the function that will be called when the user clicks the "Rename" button
-def rename_objects():
+def rename_objects(*args):
     # Get the current selection
     selection = cmds.ls(selection=True)
     if not selection:
@@ -19,9 +19,9 @@ def rename_objects():
         # Generate the new name based on the user's input
         new_name = obj
         if prefix:
-            new_name = prefix + new_name
+            new_name = prefix + '_' + new_name
         if suffix:
-            new_name = new_name + suffix
+            new_name = new_name + '_' + suffix
         if replace:
             new_name = new_name.replace(replace, replace_with)
         
