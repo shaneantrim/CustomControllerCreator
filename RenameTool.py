@@ -12,7 +12,7 @@ def rename_objects(*args):
     prefix = cmds.textFieldGrp("prefixField", query=True, text=True)
     suffix = cmds.textFieldGrp("suffixField", query=True, text=True)
     replace = cmds.textFieldGrp("replaceField", query=True, text=True)
-    replace_with = cmds.textFieldGrp("replaceWithField", query=True, text=True)
+    #replace_with = cmds.textFieldGrp("replaceWithField", query=True, text=True)
     
     # Loop through each selected object and rename it
     for obj in selection:
@@ -23,13 +23,17 @@ def rename_objects(*args):
         if suffix:
             new_name = new_name + '_' + suffix
         if replace:
-            new_name = new_name.replace(replace, replace_with)
+            new_name = new_name.replace(obj,replace)
         
         # Rename the object
         try:
             cmds.rename(obj, new_name)
         except:
             cmds.warning("Could not rename object {0} to {1}.".format(obj, new_name))
+       
+    # Confirm message
+    cmds.confirmDialog(icn = 'information', message = 'Done!')
+    cmds.showWindow()
 
 # Create the UI
 cmds.window(title="Rename Tool")
@@ -37,6 +41,6 @@ cmds.columnLayout(adjustableColumn=True)
 cmds.textFieldGrp("prefixField", label="Prefix")
 cmds.textFieldGrp("suffixField", label="Suffix")
 cmds.textFieldGrp("replaceField", label="Replace")
-cmds.textFieldGrp("replaceWithField", label="Replace With")
+#cmds.textFieldGrp("replaceWithField", label="Replace With")
 cmds.button(label="Rename", command=rename_objects)
 cmds.showWindow()
