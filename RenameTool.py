@@ -32,7 +32,7 @@ def rename_objects(*args):
             cmds.warning("Could not rename object {0} to {1}.".format(obj, new_name))
        
     # Confirm message
-    cmds.confirmDialog(icn = 'information', message = 'Done!')
+    cmds.confirmDialog(icn = 'information', message = 'The changes have been made')
     cmds.showWindow()
 
 # Create the UI
