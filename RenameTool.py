@@ -12,7 +12,7 @@ def rename_objects(*args):
     prefix = cmds.textFieldGrp("prefixField", query=True, text=True)
     suffix = cmds.textFieldGrp("suffixField", query=True, text=True)
     replace = cmds.textFieldGrp("replaceField", query=True, text=True)
-    #replace_with = cmds.textFieldGrp("replaceWithField", query=True, text=True)
+    replace_with = cmds.textFieldGrp("replaceWithField", query=True, text=True)
     
     # Loop through each selected object and rename it
     for obj in selection:
@@ -79,7 +79,7 @@ def rename_capitalize(*args):
             cmds.rename(obj, obj.capitalize())
     except:
         cmds.warning("Could not rename object {0} to {1}.".format(obj, obj.capitalize()))
-    
+
 # Making the UI of the window itself as a class
 class RN_Window(object):
 
@@ -105,6 +105,7 @@ class RN_Window(object):
 		cmds.textFieldGrp("prefixField", label="Prefix", columnAlign = [1,'center'])
 		cmds.textFieldGrp("suffixField", label="Suffix", columnAlign = [1,'center'])
 		cmds.textFieldGrp("replaceField", label="Replace", columnAlign = [1,'center'])
+		cmds.textFieldGrp("replaceWithField", label="Replace With", columnAlign = [1,'center'])
 		cmds.separator(h=4, style='none')  # Empty Space
 		cmds.rowColumnLayout(numberOfColumns = 1, columnWidth = (1,365), cs= [(1,15)])
 		cmds.button(label="Rename", command=rename_objects)
