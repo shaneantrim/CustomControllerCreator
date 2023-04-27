@@ -19,9 +19,9 @@ def rename_objects(*args):
         # Generate the new name based on the user's input
         new_name = obj
         if prefix:
-            new_name = prefix + '_' + new_name
+            new_name = prefix + new_name
         if suffix:
-            new_name = new_name + '_' + suffix
+            new_name = new_name + suffix
         if replace:
             new_name = new_name.replace(obj,replace)
         
