@@ -38,59 +38,47 @@ def rename_objects(*args):
 # Define the function that will be called when the user clicks the uppercase button
 def rename_uppercase(*args):
     # Get the current selection
-    selection = cmds.ls(selection=True)
+    selection = cmds.ls(sl=True)
     if not selection:
         cmds.warning("Please select at least one object to rename.")
         return
-    
-    to_rename = []
-    for obj in selection:
-        new_name = obj.upper()
-        to_rename.append(new_name)
-    
-    # Rename the object
+
+    # Renaming
     try:
-        cmds.rename(obj, new_name)
+        for obj in selection:
+            cmds.rename(obj, obj.upper())
     except:
-        cmds.warning("Could not rename object {0} to {1}.".format(obj, new_name))
+        cmds.warning("Could not rename object {0} to {1}.".format(obj, obj.upper()))
 
 # Define the function that will be called when the user clicks the lowercase button
 def rename_lowercase(*args):
     # Get the current selection
-    selection = cmds.ls(selection=True)
+    selection = cmds.ls(sl=True)
     if not selection:
         cmds.warning("Please select at least one object to rename.")
         return
     
-    to_rename = []
-    for obj in selection:
-        new_name = obj.lower()
-        to_rename.append(new_name)
-    
-    # Rename the object
+    # Renaming
     try:
-        cmds.rename(obj, new_name)
+        for obj in selection:
+            cmds.rename(obj, obj.lower())
     except:
-        cmds.warning("Could not rename object {0} to {1}.".format(obj, new_name))
+        cmds.warning("Could not rename object {0} to {1}.".format(obj, obj.lower()))
     
 # Define the function that will be called when the user clicks the capitalize button
 def rename_capitalize(*args):
     # Get the current selection
-    selection = cmds.ls(selection=True)
+    selection = cmds.ls(sl=True)
     if not selection:
         cmds.warning("Please select at least one object to rename.")
         return
     
-    to_rename = []
-    for obj in selection:
-        new_name = obj.capitalize()
-        to_rename.append(new_name)
-    
-    # Rename the object
+    # Renaming
     try:
-        cmds.rename(obj, new_name)
+        for obj in selection:
+            cmds.rename(obj, obj.capitalize())
     except:
-        cmds.warning("Could not rename object {0} to {1}.".format(obj, new_name))
+        cmds.warning("Could not rename object {0} to {1}.".format(obj, obj.capitalize()))
     
 # Create the UI
 cmds.window(title="Rename Tool")
