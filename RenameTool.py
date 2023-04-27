@@ -80,20 +80,42 @@ def rename_capitalize(*args):
     except:
         cmds.warning("Could not rename object {0} to {1}.".format(obj, obj.capitalize()))
     
-# Create the UI
-cmds.window(title="Rename Tool")
-cmds.columnLayout(adjustableColumn=True)
-cmds.textFieldGrp("prefixField", label="Prefix")
-cmds.textFieldGrp("suffixField", label="Suffix")
-cmds.textFieldGrp("replaceField", label="Replace")
-#cmds.textFieldGrp("replaceWithField", label="Replace With")
-cmds.separator(h=4, style='none')  # Empty Space
-cmds.rowColumnLayout(nc=3, cw=[(1, 130), (2, 130), (3, 130)], cs=[(1, 0), (2, 5), (3, 5)])
-cmds.button(l="U-Case", c=lambda x: rename_uppercase())
-cmds.button(l="Capitalize", c=lambda x: rename_capitalize())
-cmds.button(l="L-Case", c=lambda x: rename_lowercase())
+# Making the UI of the window itself as a class
+class RN_Window(object):
 
-cmds.separator(h=35, style='none')  # Empty Space
-cmds.rowColumnLayout(nc=1, cw=[(1, 130)], cs=[(1,0)])
-cmds.button(label="Rename", command=rename_objects)
-cmds.showWindow()
+	# Constructor
+	def __init__(self):
+
+		self.window = 'RN_Window'
+		self.title = 'Rename Tool'
+		self.size = (200,200)
+
+		# Close old window
+		if cmds.window(self.window, exists = True):
+			cmds.deleteUI(self.window, window = True)
+
+		# Create new window
+		self.window = cmds.window(self.window, title = self.title, widthHeight = self.size)
+
+		# Create the UI
+		cmds.columnLayout(adjustableColumn=True)
+		cmds.separator(height = 20, width = 100)
+		cmds.text('Renaming')
+		cmds.separator(height = 20, width = 100)
+		cmds.textFieldGrp("prefixField", label="Prefix", text="Prefix_", columnAlign = [1,'center'])
+		cmds.textFieldGrp("suffixField", label="Suffix", text="_Suffix", columnAlign = [1,'center'])
+		cmds.textFieldGrp("replaceField", label="Replace", columnAlign = [1,'center'])
+		cmds.separator(h=4, style='none')  # Empty Space
+		cmds.rowColumnLayout(numberOfColumns = 1, columnWidth = (1,365), cs= [(1,15)])
+		cmds.button(label="Rename", command=rename_objects)
+		cmds.separator(height = 20, width = 365)
+		cmds.rowColumnLayout(numberOfColumns = 3, columnWidth = [(1,115),(2,115),(3,115)], cs=[(1, 0), (2, 10), (3, 10)])
+		cmds.button(l="U-Case", c=lambda x: rename_uppercase())
+		cmds.button(l="Capitalize", c=lambda x: rename_capitalize())
+		cmds.button(l="L-Case", c=lambda x: rename_lowercase())
+		cmds.separator(height = 20, width = 365)
+
+		# Display new window
+		cmds.showWindow()
+
+myWindow = RN_Window()
