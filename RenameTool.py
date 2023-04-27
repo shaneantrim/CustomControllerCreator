@@ -102,8 +102,8 @@ class RN_Window(object):
 		cmds.separator(height = 20, width = 100)
 		cmds.text('Renaming')
 		cmds.separator(height = 20, width = 100)
-		cmds.textFieldGrp("prefixField", label="Prefix", text="Prefix_", columnAlign = [1,'center'])
-		cmds.textFieldGrp("suffixField", label="Suffix", text="_Suffix", columnAlign = [1,'center'])
+		cmds.textFieldGrp("prefixField", label="Prefix", columnAlign = [1,'center'])
+		cmds.textFieldGrp("suffixField", label="Suffix", columnAlign = [1,'center'])
 		cmds.textFieldGrp("replaceField", label="Replace", columnAlign = [1,'center'])
 		cmds.separator(h=4, style='none')  # Empty Space
 		cmds.rowColumnLayout(numberOfColumns = 1, columnWidth = (1,365), cs= [(1,15)])
