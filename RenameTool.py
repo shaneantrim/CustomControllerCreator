@@ -2,30 +2,25 @@ import maya.cmds as cmds
 
 # Define the function that will be called when the user clicks the "Rename" button
 def rename_objects(*args):
-    # Get the current selection
+    prefix = cmds.textFieldGrp("prefixField", q=True, text=True)
+    suffix = cmds.textFieldGrp("suffixField", q=True, text=True)
+    replace = cmds.textFieldGrp("replaceField", q=True, text=True)
+    replace_with = cmds.textFieldGrp("replaceWithField", q=True, text=True)
+
     selection = cmds.ls(selection=True)
-    if not selection:
-        cmds.warning("Please select at least one object to rename.")
-        return
-    
-    # Get the user's input from the UI
-    prefix = cmds.textFieldGrp("prefixField", query=True, text=True)
-    suffix = cmds.textFieldGrp("suffixField", query=True, text=True)
-    replace = cmds.textFieldGrp("replaceField", query=True, text=True)
-    replace_with = cmds.textFieldGrp("replaceWithField", query=True, text=True)
-    
-    # Loop through each selected object and rename it
+
     for obj in selection:
-        # Generate the new name based on the user's input
         new_name = obj
+
         if prefix:
             new_name = prefix + new_name
+
         if suffix:
             new_name = new_name + suffix
-        if replace:
-            new_name = new_name.replace(obj,replace)
-        
-        # Rename the object
+
+        if replace and replace_with:
+            new_name = new_name.replace(replace, replace_with)
+
         try:
             cmds.rename(obj, new_name)
         except:
@@ -88,7 +83,7 @@ class RN_Window(object):
 
 		self.window = 'RN_Window'
 		self.title = 'Rename Tool'
-		self.size = (200,200)
+		self.size = (400,400)
 
 		# Close old window
 		if cmds.window(self.window, exists = True):
